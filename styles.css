@@ -1,3 +1,8 @@
 *{
     margin:0px;
 }
+
+    .box1{
+        display: inline-block;
+        background:red;
+    }
