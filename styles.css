@@ -5,13 +5,66 @@
     .box1{
         display: inline-block;
         background: red;
-        width: 1450px;
+        width: 250px;
         height: 250px;
     }
 
     .box2{
-        display: inline-block;
+        display: flex;
         background: orange;
         width: 125px;
+        height: 125px;
+        
+    }
+
+    .box3{
+        display: inline-block;
+        background: green;
+        width: 250px;
+        height: 250px;
+    }
+
+    .box4{
+        display: flex;
+        background: yellow;
+        width: 125px;
+        height: 125px;
+        
+    }
+
+    .box5{
+        display: inline-block;
+        background: blue;
+        width: 250px;
+        height: 250px;
+    }
+
+    .box6{
+        display: flex;
+        background: turquoise;
+        width: 125px;
+        height: 125px;
+        
+    }
+
+    .box7{
+        display: inline-block;
+        background: purple;
+        width: 250px;
+        height: 250px;
+    }
+
+    .box8{
+        display: flex;
+        background: violet;
+        width: 125px;
+        height: 125px;
+        
+    }
+
+    .box9{
+        display: inline-block;
+        background: black;
+        width: 1000px;
         height: 125px;
     }
