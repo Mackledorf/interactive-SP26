@@ -4,7 +4,14 @@
 
     .box1{
         display: inline-block;
-        background: plum;
+        background: red;
         width: 1450px;
         height: 250px;
+    }
+
+    .box2{
+        display: inline-block;
+        background: orange;
+        width: 125px;
+        height: 125px;
     }
