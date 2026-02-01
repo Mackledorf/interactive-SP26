@@ -2,3 +2,10 @@
     font-family: Helvetica;
 }
 
+#header{
+    font-size: 32pt;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    letter-spacing: 90%;
+}
+
