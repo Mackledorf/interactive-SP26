@@ -1,5 +1,6 @@
 *{
     font-family: Helvetica;
+    margin: 0px;
 }
 
 #header{
@@ -44,7 +45,7 @@
 }
 
 .top{
-    height:50%;
+    height:100%;
     display: flex;
     flex-direction: row;
     padding:10px;
