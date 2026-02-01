@@ -35,7 +35,6 @@
     font-weight: bold;
 }
 
-/* 
 .container{
     display:flex;
     flex-direction: column;
@@ -45,7 +44,7 @@
 }
 
 .top{
-    height:100%;
+    height:50%;
     display: flex;
     flex-direction: row;
     padding:10px;
@@ -53,8 +52,7 @@
 }
 
 .top-item{
-    background:grey;
+    background:black;
     height:100%;
     width:100%;
-} */
-
+}
