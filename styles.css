@@ -6,6 +6,21 @@
     font-size: 32px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    letter-spacing: -3px;
+    color: white;
+    letter-spacing: 100%;
+}
+
+.webhead{
+    display:flex;
+    flex-direction: column;
+    background-color: black;
+    width:100vw;
+    height:100vh;
+}
+
+#footer{
+    font-size: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
 
