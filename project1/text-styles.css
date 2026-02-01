@@ -1,3 +1,9 @@
 *{
     font-family: Helvetica;
 }
+
+#header{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: 32pt;
+}
