@@ -41,7 +41,7 @@
 
 .top-item{
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background:rgb(27, 27, 27);
