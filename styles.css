@@ -1,6 +1,6 @@
 *{
     font-family: Helvetica;
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 #header{
@@ -11,22 +11,6 @@
     align-items: center;
 }
 
-.webhead{
-    display:flex;
-    flex-direction: column;
-    width:100vw;
-    height:100vh;
-    background-color: black;
-    justify-content: center;
-}
-
-.headbox{
-    display:flex;
-    flex-direction: column;
-    background-color: black;
-    width:10vw;
-    height:100vh;
-}
 
 #footer{
     display:flex;
@@ -39,6 +23,8 @@
 .container{
     display:flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     width:100vw;
     height:100vh;
@@ -48,6 +34,8 @@
     height:100%;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding:10px;
 }
 
