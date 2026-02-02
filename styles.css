@@ -55,6 +55,8 @@
 .top-item{
     display:flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background:black;
     height:100%;
     width:100%;
@@ -63,8 +65,9 @@
 }
 
 .page-button{
-    display: flex;
-    flex-direction: row;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
     background:white;
     height:50%;
     width:50%;
