@@ -65,12 +65,11 @@
 
 .page-button{
     display:flex;
-    /* justify-content: flex-start;
-    align-items: center; */
+    justify-content: flex-start;
     background:white;
     height:50px;
     width:150px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 #button-text{
