@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Time with jQuery</title>
+    <!-- Include jQuery library from a CDN -->
+    <script src="https://code.jquery.com"></script>
+    <style>
+        .clock-container {
+            font-size: 2em;
+            text-align: center;
+            margin-top: 50px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock" class="clock-container"></div>
+
+    <script type="text/javascript">
+        // Function to get the current time and format it
+        function updateTime() {
+            var now = new Date();
+            // Use toLocaleTimeString() for a simple, locale-specific time format
+            var formattedTime = now.toLocaleTimeString(); 
+            // Use jQuery to update the text content of the #clock element
+            $('#clock').text(formattedTime);
+        }
+
+        // Run the updateTime function immediately when the page loads
+        $(document).ready(function() {
+            updateTime();
+            // Then, call the updateTime function every 1000 milliseconds (1 second)
+            setInterval(updateTime, 1000);
+        });
+    </script>
+</body>
+</html>
