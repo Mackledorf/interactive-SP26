@@ -1,3 +1,7 @@
+*{
+  margin: 0px;
+}
+
 img {
   height: 300px;
   display: inline-block;
@@ -8,7 +12,6 @@ img {
   flex-direction: row;
   height:100%;
   width:100%;
-  background: url('/assets/images/sunset.jpeg');
 }
 
 #img-0 {
@@ -32,7 +35,8 @@ img {
 }
 
 #img-5 {
-  
+  height: 100vh;
+  width: 50vw;  
 }
 
 #img-6 {
@@ -49,7 +53,7 @@ img {
 
 #img-9 {
   height: 100vh;
-  width: 100vw;
+  width: 50vw;
 }
 
 #img-10 {
