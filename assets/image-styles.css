@@ -5,19 +5,19 @@ img {
 
 .container{
   display:flex;
-  justify-content: center;
+  /* justify-content: center;
   align-items: center;
   width:100vw;
-  height:100vh;
+  height:100vh; */
 }
 
 .background{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center;
   align-items: center;
   height:100%;
-  width:100%;
+  width:100%; */
   background-image: url('/assets/images/sunset.jpeg');
 }
 
