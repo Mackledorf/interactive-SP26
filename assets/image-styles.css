@@ -56,5 +56,8 @@ img {
 }
 
 #img-11 {
-
+  width: 33vw;
+  height: 38vh;
+  left:33.33vw;
+  top:10vh;
 }
