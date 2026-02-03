@@ -1,6 +1,7 @@
 img {
   height: 300px;
   display: inline-block;
+  position: fixed;
 }
 
 .container{
@@ -11,7 +12,8 @@ img {
 }
 
 #img-0 {
-  
+  width: 100vw;
+  height: 100vh;
 }
 
 #img-1 {
