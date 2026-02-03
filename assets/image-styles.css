@@ -3,8 +3,16 @@ img {
   display: inline-block;
 }
 
-#img-0 {
+.container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100vw;
+  height:100vh;
+}
 
+#img-0 {
+  
 }
 
 #img-1 {
