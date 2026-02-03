@@ -12,12 +12,11 @@ img {
 }
 
 #img-0 {
-  width: 100vw;
-  height: 100vh;
+
 }
 
 #img-1 {
-  height: 150px;
+
 }
 
 #img-2 {
@@ -49,7 +48,8 @@ img {
 }
 
 #img-9 {
-  
+  height: 100vh;
+  width: 100vw;
 }
 
 #img-10 {
