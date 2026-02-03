@@ -3,28 +3,34 @@
 }
 
 img {
-  height: 300px;
   position: fixed;
+  height: 100px;
 }
 
 #img-0 {
-
+  bottom: 50px;
+  left:0px;
 }
 
 #img-1 {
-
+  bottom: 50px;
+  left:300px;
 }
 
 #img-2 {
-  
+  position: relative;
+  left: 0;
+  height: 20vh;
 }
 
 #img-3 {
-  
+  bottom: 50px;
+  left:600px;
 }
 
 #img-4 {
-  
+  bottom: 50px;
+  left:900px;
 }
 
 #img-5 {
@@ -34,16 +40,19 @@ img {
 }
 
 #img-6 {
-  position: fixed;
+  position: absolute;
   right: 0;
+  height: 20vh;
 }
 
 #img-7 {
-  
+  top: 50px;
+  left:900px;
 }
 
 #img-8 {
-  
+  top: 50px;
+  left:600px;
 }
 
 #img-9 {
@@ -54,12 +63,13 @@ img {
 }
 
 #img-10 {
-  
+  top: 50px;
+  left:300px;
 }
 
 #img-11 {
   width: 33vw;
-  height: 38vh;
+  height: 61vh;
   left:33.33vw;
   top:10vh;
 }
