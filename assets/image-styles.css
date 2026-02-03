@@ -8,12 +8,6 @@ img {
   position: fixed;
 }
 
-.container{
-  flex-direction: row;
-  height:100%;
-  width:100%;
-}
-
 /* #img-0 {
 
 }
@@ -37,6 +31,7 @@ img {
 #img-5 {
   height: 100vh;
   width: 50vw;  
+  right: 0;
 }
 
 /* #img-6 {
@@ -54,6 +49,7 @@ img {
 #img-9 {
   height: 100vh;
   width: 50vw;
+  left:0;
 }
 
 /* #img-10 {
