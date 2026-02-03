@@ -34,7 +34,8 @@ img {
 }
 
 #img-6 {
-  
+  position: fixed;
+  right: 0;
 }
 
 #img-7 {
