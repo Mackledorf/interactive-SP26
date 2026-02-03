@@ -1,5 +1,5 @@
 img {
-  height: 200px;
+  height: 300px;
   display: inline-block;
 }
 
@@ -7,7 +7,7 @@ img {
   flex-direction: row;
   height:100%;
   width:100%;
-  background-image: url('/assets/images/sunset.jpeg');
+  background: url('/assets/images/sunset.jpeg');
 }
 
 #img-0 {
@@ -15,7 +15,7 @@ img {
 }
 
 #img-1 {
-  
+  height: 150px;
 }
 
 #img-2 {
