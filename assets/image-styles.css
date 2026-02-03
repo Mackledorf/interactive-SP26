@@ -4,7 +4,6 @@
 
 img {
   height: 300px;
-  display: flex;
   position: fixed;
 }
 
@@ -57,5 +56,5 @@ img {
 }
 
 #img-11 {
-  justify-content: center;
+
 }
