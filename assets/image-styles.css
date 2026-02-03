@@ -4,7 +4,7 @@
 
 img {
   height: 300px;
-  display: inline-block;
+  display: flex;
   position: fixed;
 }
 
@@ -54,8 +54,8 @@ img {
 
 /* #img-10 {
   
-}
+} */
 
 #img-11 {
-  
-} */
+  justify-content: ;
+}
