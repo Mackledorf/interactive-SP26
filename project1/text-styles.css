@@ -21,7 +21,9 @@
     width:80vw;
     height:20vh;
     margin-top: 20vh;
-    border-radius: 25px; 
+    border-style: solid;
+    border-color: black;
+    border-radius: 25px;
 }
 
 .bodyblock{
@@ -29,23 +31,23 @@
     flex-direction: column;
     background-color: white;
     align-items: center;
-    justify-content: center;
     width:50vw;
     height: 80vh;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     margin-top: 31px;
-    border: 10px;
+    border-style: solid;
+    border-color: black;
 }
 
 #title{
-    font-size: 37px;
+    font-size: 3vw;
     font-family:'Courier New', monospace;
     font-weight: bold;
 }
 
 #author{
-    font-size: 23px;
+    font-size: 2vw;
     font-family:'Courier New', monospace;
     font-weight: bold;
 }
@@ -55,4 +57,5 @@
     font-family:'Courier New', monospace;
     margin-left: 30px;
     margin-right: 30px;
+    margin-top: 30px;
 }
