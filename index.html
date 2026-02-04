@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html> 
-    <link rel="stylesheet" href="styles.css">
+    <head>
+      <link rel="stylesheet" href="styles.css">
+      <script src="https://code.jquery.com/jquery-4.0.0.js"   
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"></script>
+      <title>&gt;MadeByDiego</title>
+    </head>
 
     <div class="container">
         <div class="top">
             <div class="top-item">
-                <p id="header">&gt;made_by_diego</p><br>
-                <div class="page-button">
-                    <a id="button-text" href="project1/text1.html">&gt;text1</a>
-                </div>
-                <div class="page-button">
-                    <a id="button-text" href="project1/text2.html">&gt;text2</a>
-                </div>
-                <div class="page-button">
-                    <a id="button-text" href="project1/text3.html">&gt;text3</a>
-                </div>
-                <div class="page-button">
-                    <a id="button-text" href="project1/text4.html">&gt;text4</a>
-                </div>
-                <div class="page-button">
-                    <a id="button-text" href="project1/text5.html">&gt;text5</a>
-                </div>
+              <div id="clock" class="clock-container"></div>
+
+              <script type="text/javascript">
+                  function updateTime() {
+                      var now = new Date();
+                      var formattedTime = now.toLocaleTimeString(); 
+                      $('#clock').text(formattedTime);
+                  }
+          
+                  $(document).ready(function() {
+                      updateTime();
+                      setInterval(updateTime, 1000);
+                  });
+              </script>
+
+              <p id="header">&gt;WELCOME</p><br><br>
+
+              <div class="page-button">
+                  <a id="button-text" href="project1/text1.html">&gt;text1</a>
+              </div>
+
+              <div class="page-button">
+                  <a id="button-text" href="project1/text2.html">&gt;text2</a>
+              </div>
+
+              <div class="page-button">
+                  <a id="button-text" href="project1/text3.html">&gt;text3</a>
+              </div>
+
+              <div class="page-button">
+                  <a id="button-text" href="project1/text4.html">&gt;text4</a>
+              </div>
+
+              <div class="page-button">
+                  <a id="button-text" href="project1/text5.html">&gt;text5</a>
+              </div>
             </div>
         </div>
     </div>
