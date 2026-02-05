@@ -50,12 +50,13 @@
     flex-direction: column;
     position: sticky;
     top: 30px;
-    height: auto;
+    height: 80vh;
     width: 41.8%;
     border-radius: 20px;
     border-style: solid;
     margin-right: 30px;
     margin-bottom: 3vh;
+    overflow-y: auto;
 }
 
 #title{
@@ -78,6 +79,46 @@
     margin-top: 20px;
     hyphens: auto;
 }
+
+.bioimage{
+    display: flex;
+    flex-direction: column;
+    background-size: contain;
+    border-style: solid;
+    border-color: black;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    height: 400px;
+    width: auto;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#ted-kaczynski{
+    border-radius: 11.5px;
+    height: 400px;
+    width: auto;
+}
+
+#author-bio{
+    font-size: 16px;
+    font-family:'Courier New', monospace;
+    margin-left: 31px;
+    margin-right: 30px;
+    margin-top: 20px;
+    hyphens: auto;
+}
+
+
+
+
+
+/* BUTTONS */
+
+
+
+
 
 .homecontainer{
     position: fixed;
@@ -178,34 +219,4 @@
 
 .nextpagebutton:hover .nextpageimage{
     background-image: url(nextpage-button-hover.png);
-}
-
-.bioimage{
-    display: flex;
-    flex-direction: column;
-    background-size: contain;
-    border-style: solid;
-    border-color: black;
-    background-repeat: no-repeat;
-    border-radius: 15px;
-    height: 400px;
-    width: auto;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
-#ted-kaczynski{
-    border-radius: 11.5px;
-    height: 400px;
-    width: auto;
-}
-
-#author-bio{
-    font-size: 16px;
-    font-family:'Courier New', monospace;
-    margin-left: 31px;
-    margin-right: 30px;
-    margin-top: 20px;
-    hyphens: auto;
 }
