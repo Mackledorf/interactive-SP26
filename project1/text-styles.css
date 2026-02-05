@@ -200,3 +200,12 @@
     height: 400px;
     width: auto;
 }
+
+#author-bio{
+    font-size: 16px;
+    font-family:'Courier New', monospace;
+    margin-left: 31px;
+    margin-right: 30px;
+    margin-top: 20px;
+    hyphens: auto;
+}
