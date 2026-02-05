@@ -50,7 +50,7 @@
     flex-direction: column;
     position: sticky;
     top: 30px;
-    height: 745px;
+    height: auto;
     width: 41.8%;
     border-radius: 20px;
     border-style: solid;
