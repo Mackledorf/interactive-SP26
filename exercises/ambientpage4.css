@@ -24,17 +24,18 @@
     width: 100vw;
     height:100vh;
     animation: container1-animation 5s linear infinite;
+    background-color: red;
 }
 
 @keyframes container1-animation{
     0%{
-        background-color: red;
+        transform: skew(0deg)
     }
     50%{
-        background-color: white;
+        transform: skew(50deg)
     }
     100%{
-        background-color: red;
+        transform: skew(0deg)
     }
 }
 
@@ -44,17 +45,18 @@
     width: 90vw;
     height:90vh;
     animation: container2-animation 5s linear infinite;
+    background-color: orange;
 }
 
 @keyframes container2-animation{
     0%{
-        background-color: orange;
+        transform: skew(0deg)
     }
     50%{
-        background-color: red;
+        transform: skew(50deg)
     }
     100%{
-        background-color: orange;
+        transform: skew(0deg)
     }
 }
 
@@ -64,17 +66,18 @@
     width: 80vw;
     height:80vh;
     animation: container3-animation 5s linear infinite;
+    background-color: yellow;
 }
 
 @keyframes container3-animation{
     0%{
-        background-color: yellow;
+        transform: skew(0deg)
     }
     50%{
-        background-color: orange;
+        transform: skew(50deg)
     }
     100%{
-        background-color: yellow;
+        transform: skew(0deg)
     }
 }
 
@@ -84,17 +87,18 @@
     width: 70vw;
     height:70vh;
     animation: container4-animation 5s linear infinite;
+    background-color: green;
 }
 
 @keyframes container4-animation{
     0%{
-        background-color: green;
+        transform: skew(0deg)
     }
     50%{
-        background-color: yellow;
+        transform: skew(50deg)
     }
     100%{
-        background-color: green;
+        transform: skew(0deg)
     }
 }
 
@@ -104,17 +108,18 @@
     width: 60vw;
     height:60vh;
     animation: container5-animation 5s linear infinite;
+    background-color: blue;
 }
 
 @keyframes container5-animation{
     0%{
-        background-color: blue;
+        transform: skew(0deg)
     }
     50%{
-        background-color: green;
+        transform: skew(50deg)
     }
     100%{
-        background-color: blue;
+        transform: skew(0deg)
     }
 }
 
@@ -124,17 +129,18 @@
     width: 50vw;
     height:50vh;
     animation: container6-animation 5s linear infinite;
+    background-color: blueviolet;
 }
 
 @keyframes container6-animation{
     0%{
-        background-color: blueviolet;
+        transform: skew(0deg)
     }
     50%{
-        background-color: blue;
+        transform: skew(50deg)
     }
     100%{
-        background-color: blueviolet;
+        transform: skew(0deg)
     }
 }
 
@@ -144,17 +150,18 @@
     width:40vw;
     height:40vh;
     animation: container7-animation 5s linear infinite;
+    background-color: violet;
 }
 
 @keyframes container7-animation{
     0%{
-        background-color: violet;
+        transform: skew(0deg)
     }
     50%{
-        background-color: blueviolet;
+        transform: skew(50deg)
     }
     100%{
-        background-color: violet;
+        transform: skew(0deg)
     }
 }
 
@@ -164,17 +171,18 @@
     width: 30vw;
     height:30vh;
     animation: container8-animation 5s linear infinite;
+    background-color: pink;
 }
 
 @keyframes container8-animation{
     0%{
-        background-color: pink;
+        transform: skew(0deg)
     }
     50%{
-        background-color: violet;
+        transform: skew(50deg)
     }
     100%{
-        background-color: pink;
+        transform: skew(0deg)
     }
 }
 
