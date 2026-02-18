@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #d3d3d3%);
+    font-family: 'Georgia', serif;
+}
+
+.clock-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.clock {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Wooden frame with texture */
+.wooden-frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            #8B4513 0px,
+            #A0522D 2px,
+            #8B4513 4px,
+            #6F3410 6px,
+            #8B4513 8px
+        );
+    background-size: 20px 100%;
+    box-shadow: 
+        inset 0 0 30px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Vinyl record center */
+.vinyl-center {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1a1a 0%, #000 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.8),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.vinyl-grooves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+        circle,
+        transparent 0px,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 2px,
+        rgba(255, 255, 255, 0.02) 4px
+    );
+}
+
+.vinyl-label {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #E63946 0%, #C1121F 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.curved-text-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 160px;
+    height: 160px;
+    overflow: visible;
+}
+
+.curved-text {
+    font-size: 16px;
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    fill: #fff;
+    letter-spacing: 2px;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.label-title {
+    font-size: 13px;
+    font-weight: normal;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.label-list {
+    font-size: 7.5px;
+    color: #fff;
+    text-align: left;
+    line-height: 1.4;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.label-list div {
+    margin: 1px 0;
+}
+
+/* Clock numbers */
+.number {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transform: rotate(calc(var(--i) * 30deg));
+}
+
+.number span {
+    display: inline-block;
+    font-size: 38px;
+    font-weight: bold;
+    color: #FFF8DC;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        -1px -1px 2px rgba(0, 0, 0, 0.5);
+    transform: rotate(calc(var(--i) * -30deg)) translateY(-15px);
+    padding-top: 45px;
+}
+
+/* Clock hands */
+.hand {
+    position: absolute;
+    transform-origin: bottom center;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.hour-hand {
+    width: 8px;
+    height: 100px;
+    background: linear-gradient(to top, #FFF8DC, #F5E6C8);
+    bottom: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.minute-hand {
+    width: 6px;
+    height: 140px;
+    background: linear-gradient(to top, #FFF8DC, #F5E6C8);
+    bottom: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.second-hand {
+    width: 3px;
+    height: 160px;
+    background: linear-gradient(to top, #8B4513, #6F3410);
+    bottom: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 11;
+}
+
+.center-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #2c2c2c;
+    border-radius: 50%;
+    border: 3px solid #FFF8DC;
+    z-index: 12;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .clock {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .vinyl-center {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .vinyl-label {
+        width: 110px;
+        height: 110px;
+        padding: 8px;
+    }
+    
+    .curved-text-svg {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .curved-text {
+        font-size: 11px;
+    }
+    
+    .label-title {
+        font-size: 9px;
+        margin-top: 15px;
+        margin-bottom: 3px;
+    }
+    
+    .label-list {
+        font-size: 5.5px;
+        line-height: 1.3;
+    }
+    
+    .number span {
+        font-size: 26px;
+        transform: rotate(calc(var(--i) * -30deg)) translateY(-10px);
+        padding-top: 32px;
+    }
+    
+    .hour-hand {
+        height: 70px;
+    }
+    
+    .minute-hand {
+        height: 100px;
+    }
+    
+    .second-hand {
+        height: 110px;
+    }
+}
