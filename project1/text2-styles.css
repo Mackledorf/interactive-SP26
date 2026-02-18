@@ -37,26 +37,12 @@
 .bodyblock{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     border-radius: 20px;
     border-style: solid;
     margin-left: 30px;
     margin-bottom: 3vh;
     hyphens: auto;
-}
-
-.imageblock{
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 30px;
-    height: 91vh;
-    width: 41.8%;
-    border-radius: 20px;
-    border-style: solid;
-    margin-right: 30px;
-    margin-bottom: 3vh;
-    overflow-y: auto;
 }
 
 #title{

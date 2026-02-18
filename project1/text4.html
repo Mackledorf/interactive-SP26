@@ -1,48 +1,99 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="text-styles.css">   
-        <title>Watch Dogs 2 Intro</title>
-    </head>   
+        <link rel="stylesheet" href="text4-styles.css">   
+        <title>Johnny Silverhand's Monologue</title>
+    </head> 
     
-
     <body>
         <div class="container">
             <div class="centertray">
-                <p id="title">
-                    Johnny Silverhand's Monologue
-                </p>
+                <p id="title">Johnny Silverhand's Monologue</p>
 
-                <p id="author">
-                    Johnny Silverhand, Cyberpunk 2077
-                </p>
+                <p id="author">By CD Projekt Red, <i>Cyberpunk 2077</i></p>
             </div>
-            
-            <div class="bodyblock">
-                <p id="body">
-                    Okay<br>
-                    I'll tell you why I want to destroy Arasaka<br>
-                    But I'll only tell you once<br>
-                    Wanna hear it?<br>
-                    <br>
-                    I saw I saw corps strip farmers of water ... and eventually of land.<br>
-                    Saw them transform Night City into a machine fueled by people's crushed spirits broken dreams and emptied pockets.<br>
-                    Corps have long controlled our lives, taken lots... and now they're after our souls!<br>
-                    V, I've declared war not because capitalism is a thorn in my side or outta nostalgia for an America gone by.<br>
-                    This war's a people's war against a system that's spiralled outta our control.<br>
-                    It's a war against the fuckin' forces of entropy, understand?<br>
-                    Do whatever it takes to stop 'em, defeat 'em, gut 'em. If I gotta kill, I'll kill.<br>
-                    If I need your body, I'll fuckin' take it!<br>
-                    Fuckin' hell ... You still don't see it.<br>
-                    But you will one day.<br>
-                </p>
+
+            <div class="videotray">
+                <div class="videoblock">
+                    <video id="tiktok-video" controls playsinline preload="auto" autoplay loop muted>
+                        <source src="assets/Cyberpunk.mp4" type="video/mp4">
+                    </video>
+                
+                    <div class="creditblock">
+                        <p id="bio">TikTok by Joey_Yosef<br>_</p>
+                    </div>
+                </div>
+
+                <div class="bodyblock">
+                    <p id="body">&gt;Okay,<br><br>
+                        &gt;I'll tell you why I want to destroy Arasaka,<br><br>
+                        &gt;But I'll only tell you once.<br><br>
+                        &gt;Wanna hear it?<br><br>
+                        &gt;I saw corps strip farmers of water ... and eventually of land.<br><br>
+                        &gt;Saw them transform Night City into a machine fueled by people's crushed spirits broken dreams and emptied pockets.<br><br>
+                        &gt;Corps have long controlled our lives, taken lots... and now they're after our souls!<br><br>
+                        &gt;V, I've declared war not because capitalism is a thorn in my side or outta nostalgia for an America gone by.<br><br>
+                        &gt;This war's a people's war against a system that's spiralled outta our control.<br><br>
+                        &gt;It's a war against the fuckin' forces of entropy, understand?<br><br>
+                        &gt;Do whatever it takes to stop 'em, defeat 'em, gut 'em. If I gotta kill, I'll kill.<br><br>
+                        &gt;If I need your body, I'll fuckin' take it!<br><br>
+                        &gt;Fuckin' hell ... You still don't see it.<br><br>
+                        &gt;But you will one day.<br><br>
+                    </p>
+                </div>
+            </div>
+
+            <div class="bottomtray">    
+                <div class="bioblock">
+                    <div class ="bioimage">
+                        <img src='assets/dedsec.png' id='ted-kaczynski'>
+                    </div>
+
+                    <p id="bio">Watch Dogs 2 is an action-adventure game developed by Ubisoft and released in 2016. The game is set in a fictionalized version of the San Francisco Bay Area and follows the story of Marcus Holloway, a young hacker who joins the hacking group DedSec to take down the corrupt corporations and government agencies that control the city. Watch Dogs 2 features an open-world environment, allowing players to explore the city and complete various missions using hacking abilities, stealth, and combat skills.<br><br></p>
+                </div>
             </div>
 
             <div class="homecontainer">
                 <button class="homebutton" onclick="location.href='../index.html'">
-                    <img src='home-button.png' style="height: 80%;">
+                     <div class="homeimage"></div>
+                </button>
+            </div>
+
+            <div class="prevpage-container">
+                <button class="prevpagebutton" onclick="location.href='text3.html'">
+                    <div class="prevpageimage"></div>
+                </button>
+            </div>
+
+            <div class="nextpage-container">
+                <button class="nextpagebutton" onclick="location.href='text5.html'">
+                    <div class="nextpageimage"></div>
                 </button>
             </div>
         </div>
     </body>
+    <script>
+        (function(){
+            function matchHeights(){
+                const body = document.querySelector('.bodyblock');
+                const tray = document.querySelector('.videotray');
+                const vblock = document.querySelector('.videoblock');
+                if(!body || !tray) return;
+                const h = Math.ceil(body.getBoundingClientRect().height);
+                tray.style.height = h + 'px';
+                if(vblock) vblock.style.height = h + 'px';
+                // Do not force media height here — CSS handles sizing to preserve aspect ratio
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                matchHeights();
+                window.addEventListener('resize', matchHeights);
+                const body = document.querySelector('.bodyblock');
+                if(body && typeof ResizeObserver !== 'undefined'){
+                    const ro = new ResizeObserver(matchHeights);
+                    ro.observe(body);
+                }
+            });
+        })();
+    </script>
 </html>
