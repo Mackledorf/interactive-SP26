@@ -123,14 +123,42 @@
     width: 50vw;
     height:50vh;
     background-color: blueviolet;
+    animation: container5-animation 5s linear infinite;
 }
+
+@keyframes container6-animation{
+    0%{
+        background-color: blueviolet;
+    }
+    50%{
+        background-color: blue;
+    }
+    100%{
+        background-color: blueviolet;
+    }
+}
+
 .container7{
     display: flex;
     position: fixed;
     width:40vw;
     height:40vh;
-    background-color: purple;
+    background-color: violet;
+    animation: container5-animation 5s linear infinite;
 }
+
+@keyframes container5-animation{
+    0%{
+        background-color: violet;
+    }
+    50%{
+        background-color: blueviolet;
+    }
+    100%{
+        background-color: violet;
+    }
+}
+
 .container8{
     display: flex;
     position: fixed;
