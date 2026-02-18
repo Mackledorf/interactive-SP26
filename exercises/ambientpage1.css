@@ -145,3 +145,19 @@
     height:20vh;
     background-color: white;
 }
+
+.nextpageimage{
+    width:32px;
+    height: 32px;
+    background-image: url(/project1/nextpage-button.png);
+    background-size: contain;
+}
+
+.nextpageimage:hover{
+    background-image: url(/project1/nextpage-button-hover.png);
+    transition-duration: 0s;
+}
+
+.nextpagebutton:hover .nextpageimage{
+    background-image: url(/project1/nextpage-button-hover.png);
+}
