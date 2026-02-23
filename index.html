@@ -42,9 +42,16 @@
       const canvas  = document.getElementById('particle-canvas');
       const ctx     = canvas.getContext('2d');
 
+      // ── Responsive particle count ─────────────────────────────────────
+      function getParticleCount() {
+        const w = window.innerWidth;
+        if (w <= 500) return 40;
+        if (w <= 800) return 90;
+        return 180;
+      }
+
       // Config — tweak these to taste
       const CFG = {
-        particleCount : 180,
         particleColor : 'rgba(255,255,255,',   // alpha appended per particle
         lineColor     : 'rgba(255,255,255,',
         maxSize       : 3,
@@ -115,7 +122,7 @@
       // ── Particle pool ─────────────────────────────────────────────────────
       let particles = [];
       function initParticles() {
-        particles = Array.from({ length: CFG.particleCount }, () => new Particle());
+        particles = Array.from({ length: getParticleCount() }, () => new Particle());
       }
       initParticles();
 
