@@ -5,12 +5,28 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(0,0,10);
+}
+
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .container{
     display:flex;
     flex-direction: column;
-    background-color: rgb(0,0,10);
+    background-color: transparent;
     height: auto;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .headertray{
@@ -64,6 +80,7 @@
     border-style: solid;
     margin-left: 30px;
     justify-content: center;
+    background-color: black;
 }
 
 .videoblock iframe,
@@ -73,7 +90,7 @@
     width: auto;
     height: auto;
     border: none;
-    border-radius: 20px;
+    border-radius: 0;
     background: black;
     display: block;
     object-fit: contain;

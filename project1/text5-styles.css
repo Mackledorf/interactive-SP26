@@ -4,11 +4,27 @@
     color: rgb(245,245,245);
 }
 
+body {
+    background-color: rgb(0,0,0);
+}
+
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .container{
     display:flex;
     flex-direction: column;
-    background-color: rgb(0,0,0);
+    background-color: transparent;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .centertray{
