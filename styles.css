@@ -74,6 +74,11 @@ body {
   width: 150px;
   border-radius: 5px;
   transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  color: rgb(27, 27, 27);
+  font-size: 1rem;
 }
 
 .page-button:hover {

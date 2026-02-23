@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FC — Lincoln, MT</title>
+    <link rel="stylesheet" href="mail-styles.css" />
+  </head>
+  <body>
+
+    <div class="paper-block">
+      <p class="postmark">Lincoln, MT &nbsp;&bull;&nbsp; Feb 1996 &nbsp;&bull;&nbsp; Postmarked: Rural Route 2</p>
+      <hr class="paper-rule" />
+      <p class="salutation">To whoever finds this,</p>
+      <p id="letter-content"><span class="cursor"></span></p>
+      <p class="signature" id="signature">— TK</p>
+    </div>
+
+    <div class="homecontainer">
+      <button class="homebutton" onclick="location.href='../index.html'">
+        <div class="homeimage"></div>
+      </button>
+    </div>
+
+    <canvas id="explosion-canvas"></canvas>
+
+    <div class="prevpage-container">
+      <button class="prevpagebutton" onclick="location.href='text1.html'">
+        <div class="prevpageimage"></div>
+      </button>
+    </div>
+
+    <script>
+      const text = `I write not to justify myself, but to be understood. The manifesto was not the cry of a madman. It was a diagnosis — one I spent twenty years in the woods confirming.
+
+The industrial system has not improved the human condition. It has replaced one form of suffering with a more palatable one. We are comfortable. We are monitored. We believe these to be unrelated.
+
+I chopped my own wood. I grew what I ate. I was free in the only way that counts: I was responsible for my own survival. From that vantage point, the machine becomes visible. And once it is visible, you cannot unsee it.
+
+They will call this hatred. They will call it madness. Ask yourself — what does it mean that the most coherent critique of industrial civilization was written by a man with no internet connection?
+
+The network you now live inside was built while you were distracted. They called it progress. They meant control.
+
+You already know this.
+You just forgot how to say it.`;
+
+      const el = document.getElementById('letter-content');
+      const sig = document.getElementById('signature');
+      let i = 0;
+      const speed = 8; // ms per character
+
+      function type() {
+        if (i < text.length) {
+          const cursor = el.querySelector('.cursor');
+          const typed = document.createTextNode(text.charAt(i));
+          el.insertBefore(typed, cursor);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          const cursor = el.querySelector('.cursor');
+          if (cursor) cursor.remove();
+          sig.classList.add('visible');
+          setTimeout(triggerExplosion, 800);
+        }
+      }
+
+      function triggerExplosion() {
+        const paper = document.querySelector('.paper-block');
+        const rect  = paper.getBoundingClientRect();
+        const cx = rect.left + rect.width  / 2;
+        const cy = rect.top  + rect.height / 2;
+
+        // Hide the paper instantly — the flash covers the cut
+        paper.style.visibility = 'hidden';
+
+        const expCanvas = document.getElementById('explosion-canvas');
+        expCanvas.width  = window.innerWidth;
+        expCanvas.height = window.innerHeight;
+        expCanvas.style.display = 'block';
+        const ctx = expCanvas.getContext('2d');
+
+        document.body.classList.add('shake');
+        document.body.addEventListener('animationend', function(){
+          document.body.classList.remove('shake');
+        }, { once: true });
+
+        const fireColors = [
+          '#ff8c00','#ff4500','#ff6600','#ffd700','#ff2200',
+          '#ffffff','#ffaa00','#cc3300','#ffee88'
+        ];
+        const smokeColors = ['#888','#777','#999','#666'];
+
+        const particles = [];
+        for (let n = 0; n < 200; n++) {
+          const angle = Math.random() * Math.PI * 2;
+          const spd   = 2 + Math.random() * 16;
+          particles.push({
+            x: cx + (Math.random()-.5) * rect.width  * 0.6,
+            y: cy + (Math.random()-.5) * rect.height * 0.6,
+            vx: Math.cos(angle)*spd,
+            vy: Math.sin(angle)*spd - Math.random()*4,
+            r: 1.5 + Math.random()*4,
+            color: fireColors[Math.floor(Math.random()*fireColors.length)],
+            alpha: 1,
+            decay: 0.012 + Math.random()*0.02,
+            gravity: 0.12 + Math.random()*0.1,
+            smoke: false
+          });
+        }
+        for (let n = 0; n < 60; n++) {
+          const angle = Math.random() * Math.PI * 2;
+          const spd   = 0.5 + Math.random() * 4;
+          particles.push({
+            x: cx + (Math.random()-.5) * rect.width  * 0.7,
+            y: cy + (Math.random()-.5) * rect.height * 0.7,
+            vx: Math.cos(angle)*spd,
+            vy: Math.sin(angle)*spd - 0.5 - Math.random(),
+            r: 8 + Math.random()*18,
+            color: smokeColors[Math.floor(Math.random()*smokeColors.length)],
+            alpha: 0.55,
+            decay: 0.005 + Math.random()*0.004,
+            gravity: -0.04,
+            smoke: true
+          });
+        }
+
+        let flashAlpha = 0.9;
+
+        function animate() {
+          ctx.clearRect(0, 0, expCanvas.width, expCanvas.height);
+          if (flashAlpha > 0) {
+            ctx.globalAlpha = flashAlpha;
+            ctx.fillStyle = '#ffdd66';
+            ctx.fillRect(0, 0, expCanvas.width, expCanvas.height);
+            flashAlpha -= 0.065;
+            ctx.globalAlpha = 1;
+          }
+          let alive = false;
+          for (const p of particles) {
+            if (p.alpha <= 0) continue;
+            alive = true;
+            p.x  += p.vx;
+            p.y  += p.vy;
+            p.vy += p.gravity;
+            p.vx *= 0.975;
+            p.alpha -= p.decay;
+            if (p.smoke) p.r += 0.25;
+            ctx.globalAlpha = Math.max(p.alpha, 0);
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+          }
+          ctx.globalAlpha = 1;
+          if (alive || flashAlpha > 0) {
+            requestAnimationFrame(animate);
+          } else {
+            expCanvas.style.display = 'none';
+            paper.style.display = 'none';
+          }
+        }
+        animate();
+      }
+
+      // Small delay before typing starts
+      setTimeout(type, 600);
+    </script>
+  </body>
+</html>

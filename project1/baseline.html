@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baseline — BRTF Session</title>
+    <link rel="stylesheet" href="baseline-styles.css" />
+  </head>
+  <body>
+
+    <div class="terminal-block" id="terminal">
+      <p class="session-label">BRTF &nbsp;&bull;&nbsp; KD6-3.7 &nbsp;&bull;&nbsp; Session 1897</p>
+      <p class="word-display" id="word-display">&#9608;</p>
+      <p class="hint" id="hint">click or press any key to begin</p>
+    </div>
+
+    <div class="homecontainer">
+      <button class="homebutton" onclick="location.href='../index.html'">
+        <div class="homeimage"></div>
+      </button>
+    </div>
+
+    <div class="prevpage-container">
+      <button class="prevpagebutton" onclick="location.href='text2.html'">
+        <div class="prevpageimage"></div>
+      </button>
+    </div>
+
+    <script>
+      const prompts = [
+        "A blood black nothingness began to spin.",
+        "System.",
+        "Cells.",
+        "Interlinked.",
+        "Within cells interlinked.",
+        "Within one stem.",
+        "And dreadfully distinct.",
+        "Against the dark.",
+        "A tall white fountain played."
+      ];
+
+      let step = -1; // -1 = waiting to start
+      let done = false;
+      const wordEl  = document.getElementById('word-display');
+      const hintEl  = document.getElementById('hint');
+      const terminal = document.getElementById('terminal');
+
+      function advance() {
+        if (done) return;
+        step++;
+
+        if (step < prompts.length) {
+          // Restart the fade-in animation by cloning
+          wordEl.style.animation = 'none';
+          wordEl.offsetHeight; // reflow
+          wordEl.style.animation = '';
+          wordEl.textContent = prompts[step];
+          hintEl.style.opacity = '0.35';
+          hintEl.textContent   = 'click or press any key to continue';
+          hintEl.style.animation = 'none';
+        } else {
+          done = true;
+          showResult();
+        }
+      }
+
+      function showResult() {
+        // Flash
+        const flash = document.createElement('div');
+        flash.className = 'flash-overlay';
+        document.body.appendChild(flash);
+        setTimeout(() => flash.remove(), 300);
+
+        const confirmed = Math.random() > 0.5;
+        hintEl.style.display = 'none';
+
+        setTimeout(() => {
+          wordEl.textContent = '';
+          const resultEl = document.createElement('p');
+          resultEl.className = 'result-display ' + (confirmed ? 'confirmed' : 'deviation');
+          resultEl.textContent = confirmed
+            ? '> BASELINE: CONFIRMED'
+            : '> DEVIATION DETECTED';
+          wordEl.replaceWith(resultEl);
+
+          const subEl = document.createElement('p');
+          subEl.className = 'result-sub';
+          subEl.textContent = confirmed
+            ? 'Thank you. You may return to your assignment.'
+            : 'Officer — please escort KD6-3.7 to holding.';
+          terminal.appendChild(subEl);
+        }, 350);
+      }
+
+      document.addEventListener('click',   advance);
+      document.addEventListener('keydown',  advance);
+    </script>
+  </body>
+</html>

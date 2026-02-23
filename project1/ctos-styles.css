@@ -1,277 +1,236 @@
-*{
+* {
     font-family: 'Courier New', monospace;
-    margin: 0px;
-    color: rgb(197,0,60);
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background-color: rgb(0,0,10);
-}
-
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.container{
-    display:flex;
-    flex-direction: column;
-    background-color: transparent;
-    height: auto;
+    background-color: rgb(0, 6, 0);
+    min-height: 100vh;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+/* dense CRT scanlines */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.12) 2px,
+        rgba(0, 0, 0, 0.12) 3px
+    );
+}
+
+/* ── Profile block ────────────────────────────────────────────────────────── */
+.profile-block {
     position: relative;
     z-index: 1;
-}
-
-.headertray{
-    display:flex;
-    flex-direction: column;
-    background-color: rgb(0,0,10);
-    align-items: center;
-    justify-content: center;
-    width:80%;
-    height:20vh;
-    margin-top: 10vh;
-    border-style: solid;
-    border-color: rgb(85,234,212);
-    border-radius: 25px;
-}
-
-.videotray{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    height: auto;
-    gap: 30px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    align-items: flex-start;
-}
-
-.creditblock{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: auto;
-    height: 40px;
-    padding: 8px 12px;
-    background-color: rgb(197,0,60);
-    border-style: solid;
-    border-top-left-radius: 16px;
-    border-bottom-right-radius: 10px;
-}
-
-.videoblock{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: auto;
-    position: relative;
+    max-width: 660px;
+    background-color: rgba(0, 18, 0, 0.97);
     border-radius: 20px;
     border-style: solid;
-    margin-left: 30px;
-    justify-content: center;
-    background-color: black;
+    border-width: 1.5px;
+    border-color: rgb(40, 160, 80);
+    box-shadow: 0 0 30px rgba(40, 160, 80, 0.12);
+    padding: 44px 50px 44px;
+    color: rgb(0, 255, 65);
 }
 
-.videoblock iframe,
-.videoblock video{
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+.ctos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ctos-title {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgb(0, 255, 65);
+}
+
+.ctos-version {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(0, 255, 65, 0.4);
+    text-transform: uppercase;
+}
+
+.ctos-divider {
     border: none;
-    border-radius: 20px;
-    background: black;
-    display: block;
-    object-fit: contain;
+    border-top: 1px solid rgba(40, 160, 80, 0.3);
+    margin-bottom: 28px;
 }
 
-.bottomtray{
+/* ── Scan bar ─────────────────────────────────────────────────────────────── */
+.scan-container {
     display: flex;
     flex-direction: column;
+    gap: 14px;
+    padding: 20px 0 10px;
+}
+
+.scan-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(0, 255, 65, 0.6);
+    text-transform: uppercase;
+}
+
+.scan-track {
     width: 100%;
-    height: auto;
-    gap: 30px;
-    margin-bottom: 30px;
+    height: 6px;
+    background-color: rgba(40, 160, 80, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
 }
 
-.bodyblock{
-    display: flex;
+.scan-fill {
+    height: 100%;
+    width: 0%;
+    background-color: rgb(40, 160, 80);
+    border-radius: 3px;
+    animation: scan-progress 3s ease forwards;
+}
+
+@keyframes scan-progress {
+    0%   { width: 0%; }
+    60%  { width: 75%; }
+    80%  { width: 85%; }
+    95%  { width: 96%; }
+    100% { width: 100%; }
+}
+
+.scan-status {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(0, 255, 65, 0.5);
+    text-transform: uppercase;
+    animation: scan-blink 0.7s step-end infinite;
+}
+
+@keyframes scan-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+}
+
+/* ── Profile data ─────────────────────────────────────────────────────────── */
+.profile-data {
+    display: none;
     flex-direction: column;
-    background-color: black;
-    width: 50%;
-    height: auto;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: rgb(85,234,212);
-    hyphens: auto;
-    margin-right: 30px;
+    gap: 0;
 }
 
-.bioblock{
+.profile-data.visible {
     display: flex;
-    flex-direction: column;
-    background-color: rgb(197,0,60);
-    width: auto;
-    height: auto;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: rgb(243,230,0);
-    margin-left: 30px;
-    margin-right: 30px;
 }
 
-#title{
-    font-size: 3vw;
-    font-family:'Courier New', monospace;
-    font-weight: bold;
-    color: rgb(85,234,212);
-}
-
-#author{
-    font-size: 2vw;
-    font-family:'Courier New', monospace;
-    font-weight: bold;
-    color: rgb(85,234,212);
-}
-
-#body{
-    font-size: 16px;
-    font-family:'Courier New', monospace;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 20px;
-    hyphens: auto;
-    color: rgb(85,234,212);
-}
-
-#credit{
-    font-size: 16px;
-    font-family:'Courier New', monospace;
-    hyphens: auto;
-    color: black;
-}
-
-#bio{
-    font-size: 16px;
-    font-family:'Courier New', monospace;
-    margin-left: 30px;
-    margin-right: 30px;
-    hyphens: auto;
-    color: black;
-    margin-top: 10px;
-}
-
-.bioimage{
-    display: flex;
-    flex-direction: column;
-    background-size: contain;
-    border-style: solid;
-    border-color: black;
-    background-repeat: no-repeat;
-    border-radius: 15px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 30px;
-}
-
-/* two-column author bio */
-.author-columns{
+.profile-row {
     display: flex;
     flex-direction: row;
-    gap: 30px;
-    margin-top: 20px; 
-    margin-left: 32px;
-    margin-right: 28px;
-    margin-bottom: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(40, 160, 80, 0.1);
+    gap: 20px;
 }
 
-.author-columns .author-col{
-    flex: 1 1 0;
-    font-size: 16px;
-    font-family: 'Courier New', monospace;
-    color: black;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    overflow-wrap: break-word;
+.profile-row:last-child {
+    border-bottom: none;
 }
 
-#image{
-    border-radius: 11.5px;
-    height: auto;
-    width: auto;
+.row-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(0, 255, 65, 0.4);
+    text-transform: uppercase;
+    min-width: 160px;
+    flex-shrink: 0;
+    padding-top: 1px;
 }
 
-#author-bio{
-    font-size: 16px;
-    font-family:'Courier New', monospace;
-    margin-left: 31px;
-    margin-right: 30px;
-    margin-top: 20px;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
+.row-value {
+    font-size: 13px;
+    color: rgb(0, 255, 65);
+    word-break: break-all;
+    line-height: 1.5;
 }
 
+.row-value.alert {
+    color: rgb(255, 80, 60);
+}
 
+/* blinking cursor at end of last row */
+.blink-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background-color: rgb(0, 255, 65);
+    vertical-align: text-bottom;
+    margin-left: 3px;
+    animation: cur-blink 0.8s step-end infinite;
+}
 
+@keyframes cur-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
 
+.ctos-footer {
+    margin-top: 28px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(0, 255, 65, 0.3);
+    text-transform: uppercase;
+    line-height: 1.7;
+}
 
-/* BUTTONS */
-
-
-
-
-
-.homecontainer{
+/* ── Nav buttons (text5 palette: black bg, white accent) ──────────────────── */
+.homecontainer {
     position: fixed;
-    left:10px;
-    top:10px;
+    left: 10px;
+    top: 10px;
     width: 50px;
     height: 50px;
-    align-content: center;
-    justify-content: center;
-}   
+}
 
-.homebutton{
+.homebutton {
     display: flex;
-    background:none;
     width: 50px;
     height: 50px;
-    background-color: rgb(0,0,10);
+    background-color: rgb(0, 0, 0);
     border-style: solid;
-    border-color: rgb(243,230,0);
+    border-color: rgb(245, 245, 245);
     border-radius: 25px;
+    border-width: 2.5px;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
-.homebutton:hover{
-    background-color:rgb(243,230,0);
-    width: 50px;
-    height: 50px;
-    border-style: solid;
-    border-color: rgb(243,230,0);
-    background-repeat: no-repeat;
-    border-radius: 25px;
+.homebutton:hover {
+    background-color: rgb(245, 245, 245);
+    border-color: rgb(245, 245, 245);
     transition-duration: 0s;
 }
 
-.homeimage{
-    width:35px;
-    height:35px;
-    background-color: rgb(243,230,0);
+.homeimage {
+    width: 35px;
+    height: 35px;
+    background-color: rgb(245, 245, 245);
     mask-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cstyle%3Erect{fill:white}%3C/style%3E  %3Crect x='138.78' y='20' width='20' height='20'/%3E  %3Crect x='158.78' y='20' width='20' height='20'/%3E  %3Crect x='158.78' y='40' width='20' height='20'/%3E  %3Crect x='178.78' y='40' width='20' height='20'/%3E  %3Crect x='138.78' y='40' width='20' height='20'/%3E  %3Crect x='118.78' y='40' width='20' height='20'/%3E  %3Crect x='118.78' y='60' width='20' height='20'/%3E  %3Crect x='98.78' y='60' width='20' height='20'/%3E  %3Crect x='98.78' y='80' width='20' height='20'/%3E  %3Crect x='78.78' y='80' width='20' height='20'/%3E  %3Crect x='78.78' y='100' width='20' height='20'/%3E  %3Crect x='58.78' y='100' width='20' height='20'/%3E  %3Crect x='58.78' y='120' width='20' height='20'/%3E  %3Crect x='38.78' y='120' width='20' height='20'/%3E  %3Crect x='38.78' y='140' width='20' height='20'/%3E  %3Crect x='38.78' y='160' width='20' height='20'/%3E  %3Crect x='38.78' y='180' width='20' height='20'/%3E  %3Crect x='38.78' y='200' width='20' height='20'/%3E  %3Crect x='38.78' y='220' width='20' height='20'/%3E  %3Crect x='38.78' y='240' width='20' height='20'/%3E  %3Crect x='38.78' y='260' width='20' height='20'/%3E  %3Crect x='38.78' y='280' width='20' height='20'/%3E  %3Crect x='258.78' y='160' width='20' height='20'/%3E  %3Crect x='258.78' y='180' width='20' height='20'/%3E  %3Crect x='258.78' y='200' width='20' height='20'/%3E  %3Crect x='258.78' y='220' width='20' height='20'/%3E  %3Crect x='258.78' y='240' width='20' height='20'/%3E  %3Crect x='258.78' y='260' width='20' height='20'/%3E  %3Crect x='258.78' y='280' width='20' height='20'/%3E  %3Crect x='58.78' y='300' width='20' height='20'/%3E  %3Crect x='78.78' y='300' width='20' height='20'/%3E  %3Crect x='98.78' y='300' width='20' height='20'/%3E  %3Crect x='118.78' y='260' width='20' height='20'/%3E  %3Crect x='118.78' y='280' width='20' height='20'/%3E  %3Crect x='118.78' y='240' width='20' height='20'/%3E  %3Crect x='118.78' y='220' width='20' height='20'/%3E  %3Crect x='118.78' y='200' width='20' height='20'/%3E  %3Crect x='138.78' y='180' width='20' height='20'/%3E  %3Crect x='158.78' y='180' width='20' height='20'/%3E  %3Crect x='178.78' y='200' width='20' height='20'/%3E  %3Crect x='178.78' y='220' width='20' height='20'/%3E  %3Crect x='178.78' y='240' width='20' height='20'/%3E  %3Crect x='178.78' y='260' width='20' height='20'/%3E  %3Crect x='178.78' y='280' width='20' height='20'/%3E  %3Crect x='198.78' y='300' width='20' height='20'/%3E  %3Crect x='218.78' y='300' width='20' height='20'/%3E  %3Crect x='238.78' y='300' width='20' height='20'/%3E  %3Crect x='18.78' y='140' width='20' height='20'/%3E  %3Crect x='18.78' y='160' width='20' height='20'/%3E  %3Crect x='-1.22' y='160' width='20' height='20'/%3E  %3Crect x='178.78' y='60' width='20' height='20'/%3E  %3Crect x='198.78' y='60' width='20' height='20'/%3E  %3Crect x='198.78' y='80' width='20' height='20'/%3E  %3Crect x='218.78' y='80' width='20' height='20'/%3E  %3Crect x='218.78' y='100' width='20' height='20'/%3E  %3Crect x='238.78' y='100' width='20' height='20'/%3E  %3Crect x='238.78' y='120' width='20' height='20'/%3E  %3Crect x='258.78' y='120' width='20' height='20'/%3E  %3Crect x='258.78' y='140' width='20' height='20'/%3E  %3Crect x='278.78' y='140' width='20' height='20'/%3E  %3Crect x='278.78' y='160' width='20' height='20'/%3E  %3Crect x='298.78' y='160' width='20' height='20'/%3E%3C/svg%3E");
     -webkit-mask-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cstyle%3Erect{fill:white}%3C/style%3E  %3Crect x='138.78' y='20' width='20' height='20'/%3E  %3Crect x='158.78' y='20' width='20' height='20'/%3E  %3Crect x='158.78' y='40' width='20' height='20'/%3E  %3Crect x='178.78' y='40' width='20' height='20'/%3E  %3Crect x='138.78' y='40' width='20' height='20'/%3E  %3Crect x='118.78' y='40' width='20' height='20'/%3E  %3Crect x='118.78' y='60' width='20' height='20'/%3E  %3Crect x='98.78' y='60' width='20' height='20'/%3E  %3Crect x='98.78' y='80' width='20' height='20'/%3E  %3Crect x='78.78' y='80' width='20' height='20'/%3E  %3Crect x='78.78' y='100' width='20' height='20'/%3E  %3Crect x='58.78' y='100' width='20' height='20'/%3E  %3Crect x='58.78' y='120' width='20' height='20'/%3E  %3Crect x='38.78' y='120' width='20' height='20'/%3E  %3Crect x='38.78' y='140' width='20' height='20'/%3E  %3Crect x='38.78' y='160' width='20' height='20'/%3E  %3Crect x='38.78' y='180' width='20' height='20'/%3E  %3Crect x='38.78' y='200' width='20' height='20'/%3E  %3Crect x='38.78' y='220' width='20' height='20'/%3E  %3Crect x='38.78' y='240' width='20' height='20'/%3E  %3Crect x='38.78' y='260' width='20' height='20'/%3E  %3Crect x='38.78' y='280' width='20' height='20'/%3E  %3Crect x='258.78' y='160' width='20' height='20'/%3E  %3Crect x='258.78' y='180' width='20' height='20'/%3E  %3Crect x='258.78' y='200' width='20' height='20'/%3E  %3Crect x='258.78' y='220' width='20' height='20'/%3E  %3Crect x='258.78' y='240' width='20' height='20'/%3E  %3Crect x='258.78' y='260' width='20' height='20'/%3E  %3Crect x='258.78' y='280' width='20' height='20'/%3E  %3Crect x='58.78' y='300' width='20' height='20'/%3E  %3Crect x='78.78' y='300' width='20' height='20'/%3E  %3Crect x='98.78' y='300' width='20' height='20'/%3E  %3Crect x='118.78' y='260' width='20' height='20'/%3E  %3Crect x='118.78' y='280' width='20' height='20'/%3E  %3Crect x='118.78' y='240' width='20' height='20'/%3E  %3Crect x='118.78' y='220' width='20' height='20'/%3E  %3Crect x='118.78' y='200' width='20' height='20'/%3E  %3Crect x='138.78' y='180' width='20' height='20'/%3E  %3Crect x='158.78' y='180' width='20' height='20'/%3E  %3Crect x='178.78' y='200' width='20' height='20'/%3E  %3Crect x='178.78' y='220' width='20' height='20'/%3E  %3Crect x='178.78' y='240' width='20' height='20'/%3E  %3Crect x='178.78' y='260' width='20' height='20'/%3E  %3Crect x='178.78' y='280' width='20' height='20'/%3E  %3Crect x='198.78' y='300' width='20' height='20'/%3E  %3Crect x='218.78' y='300' width='20' height='20'/%3E  %3Crect x='238.78' y='300' width='20' height='20'/%3E  %3Crect x='18.78' y='140' width='20' height='20'/%3E  %3Crect x='18.78' y='160' width='20' height='20'/%3E  %3Crect x='-1.22' y='160' width='20' height='20'/%3E  %3Crect x='178.78' y='60' width='20' height='20'/%3E  %3Crect x='198.78' y='60' width='20' height='20'/%3E  %3Crect x='198.78' y='80' width='20' height='20'/%3E  %3Crect x='218.78' y='80' width='20' height='20'/%3E  %3Crect x='218.78' y='100' width='20' height='20'/%3E  %3Crect x='238.78' y='100' width='20' height='20'/%3E  %3Crect x='238.78' y='120' width='20' height='20'/%3E  %3Crect x='258.78' y='120' width='20' height='20'/%3E  %3Crect x='258.78' y='140' width='20' height='20'/%3E  %3Crect x='278.78' y='140' width='20' height='20'/%3E  %3Crect x='278.78' y='160' width='20' height='20'/%3E  %3Crect x='298.78' y='160' width='20' height='20'/%3E%3C/svg%3E");
     mask-size: contain;
@@ -282,80 +241,42 @@ body {
     -webkit-mask-position: center;
 }
 
-.homebutton:hover .homeimage{
-    background-color: rgb(0,0,10);
+.homebutton:hover .homeimage {
+    background-color: rgb(0, 0, 0);
 }
 
-.nextpage-container{
+.prevpage-container {
     position: fixed;
-    right:10px;
-    bottom:10px;
+    left: 10px;
+    bottom: 10px;
     width: 50px;
     height: 50px;
-    align-content: center;
-    justify-content: center;
-}   
+}
 
-.nextpagebutton{
+.prevpagebutton {
     display: flex;
-    background:none;
     width: 50px;
     height: 50px;
+    background-color: rgb(0, 0, 0);
     border-style: solid;
-    border-color: rgb(243,230,0);
+    border-color: rgb(245, 245, 245);
     border-radius: 25px;
+    border-width: 2.5px;
     align-items: center;
     justify-content: center;
-    background-color: rgb(0,0,10);
+    cursor: pointer;
 }
 
-.nextpagebutton:hover{
-    background-color:rgb(243,230,0);
-    width: 50px;
-    height: 50px;
-    border-style: solid;
-    border-color: rgb(243,230,0);
-    
+.prevpagebutton:hover {
+    background-color: rgb(245, 245, 245);
+    border-color: rgb(245, 245, 245);
     transition-duration: 0s;
 }
 
-.prevpage-container{
-    position: fixed;
-    left:10px;
-    bottom:10px;
-    width: 50px;
-    height: 50px;
-    align-content: center;
-    justify-content: center;
-}   
-
-.prevpagebutton{
-    display: flex;
-    background:none;
-    width: 50px;
-    height: 50px;
-    border-style: solid;
-    border-color: rgb(243,230,0);
-    border-radius: 25px;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(0,0,10);
-}
-
-.prevpagebutton:hover{
-    background-color:rgb(243,230,0);
-    width: 50px;
-    height: 50px;
-    border-style: solid;
-    border-color: rgb(243,230,0);
-    
-    transition-duration: 0s;
-}
-
-.prevpageimage{
-    width:32px;
+.prevpageimage {
+    width: 32px;
     height: 32px;
-    background-color: rgb(243,230,0);
+    background-color: rgb(245, 245, 245);
     mask-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cstyle%3Erect{fill:white}%3C/style%3E  %3Crect x='220' y='0' width='20' height='20'/%3E  %3Crect x='200' y='0' width='20' height='20'/%3E  %3Crect x='180' y='0' width='20' height='20'/%3E  %3Crect x='220' y='300' width='20' height='20'/%3E  %3Crect x='200' y='300' width='20' height='20'/%3E  %3Crect x='180' y='300' width='20' height='20'/%3E  %3Crect x='160' y='20' width='20' height='20'/%3E  %3Crect x='140' y='40' width='20' height='20'/%3E  %3Crect x='120' y='60' width='20' height='20'/%3E  %3Crect x='100' y='80' width='20' height='20'/%3E  %3Crect x='80' y='100' width='20' height='20'/%3E  %3Crect x='160' y='280' width='20' height='20'/%3E  %3Crect x='140' y='260' width='20' height='20'/%3E  %3Crect x='120' y='240' width='20' height='20'/%3E  %3Crect x='100' y='220' width='20' height='20'/%3E  %3Crect x='80' y='200' width='20' height='20'/%3E  %3Crect x='60' y='120' width='20' height='20'/%3E  %3Crect x='40' y='140' width='20' height='20'/%3E  %3Crect x='40' y='160' width='20' height='20'/%3E  %3Crect x='240' y='260' width='20' height='20'/%3E  %3Crect x='240' y='280' width='20' height='20'/%3E  %3Crect x='240' y='20' width='20' height='20'/%3E  %3Crect x='240' y='40' width='20' height='20'/%3E  %3Crect x='60' y='180' width='20' height='20'/%3E  %3Crect x='220' y='60' width='20' height='20'/%3E  %3Crect x='200' y='80' width='20' height='20'/%3E  %3Crect x='180' y='100' width='20' height='20'/%3E  %3Crect x='220' y='240' width='20' height='20'/%3E  %3Crect x='200' y='220' width='20' height='20'/%3E  %3Crect x='180' y='200' width='20' height='20'/%3E  %3Crect x='160' y='120' width='20' height='20'/%3E  %3Crect x='140' y='140' width='20' height='20'/%3E  %3Crect x='140' y='160' width='20' height='20'/%3E  %3Crect x='160' y='180' width='20' height='20'/%3E%3C/svg%3E");
     -webkit-mask-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cstyle%3Erect{fill:white}%3C/style%3E  %3Crect x='220' y='0' width='20' height='20'/%3E  %3Crect x='200' y='0' width='20' height='20'/%3E  %3Crect x='180' y='0' width='20' height='20'/%3E  %3Crect x='220' y='300' width='20' height='20'/%3E  %3Crect x='200' y='300' width='20' height='20'/%3E  %3Crect x='180' y='300' width='20' height='20'/%3E  %3Crect x='160' y='20' width='20' height='20'/%3E  %3Crect x='140' y='40' width='20' height='20'/%3E  %3Crect x='120' y='60' width='20' height='20'/%3E  %3Crect x='100' y='80' width='20' height='20'/%3E  %3Crect x='80' y='100' width='20' height='20'/%3E  %3Crect x='160' y='280' width='20' height='20'/%3E  %3Crect x='140' y='260' width='20' height='20'/%3E  %3Crect x='120' y='240' width='20' height='20'/%3E  %3Crect x='100' y='220' width='20' height='20'/%3E  %3Crect x='80' y='200' width='20' height='20'/%3E  %3Crect x='60' y='120' width='20' height='20'/%3E  %3Crect x='40' y='140' width='20' height='20'/%3E  %3Crect x='40' y='160' width='20' height='20'/%3E  %3Crect x='240' y='260' width='20' height='20'/%3E  %3Crect x='240' y='280' width='20' height='20'/%3E  %3Crect x='240' y='20' width='20' height='20'/%3E  %3Crect x='240' y='40' width='20' height='20'/%3E  %3Crect x='60' y='180' width='20' height='20'/%3E  %3Crect x='220' y='60' width='20' height='20'/%3E  %3Crect x='200' y='80' width='20' height='20'/%3E  %3Crect x='180' y='100' width='20' height='20'/%3E  %3Crect x='220' y='240' width='20' height='20'/%3E  %3Crect x='200' y='220' width='20' height='20'/%3E  %3Crect x='180' y='200' width='20' height='20'/%3E  %3Crect x='160' y='120' width='20' height='20'/%3E  %3Crect x='140' y='140' width='20' height='20'/%3E  %3Crect x='140' y='160' width='20' height='20'/%3E  %3Crect x='160' y='180' width='20' height='20'/%3E%3C/svg%3E");
     mask-size: contain;
@@ -366,75 +287,6 @@ body {
     -webkit-mask-position: center;
 }
 
-.prevpagebutton:hover .prevpageimage{
-    background-color: rgb(0,0,10);
-}
-
-.nextpageimage{
-    width:32px;
-    height: 32px;
-    background-color: rgb(243,230,0);
-    mask-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cstyle%3Erect{fill:white}%3C/style%3E  %3Crect x='78.78' width='20' height='20'/%3E  %3Crect x='98.78' width='20' height='20'/%3E  %3Crect x='118.78' width='20' height='20'/%3E  %3Crect x='78.78' y='300' width='20' height='20'/%3E  %3Crect x='98.78' y='300' width='20' height='20'/%3E  %3Crect x='118.78' y='300' width='20' height='20'/%3E  %3Crect x='138.78' y='20' width='20' height='20'/%3E  %3Crect x='158.78' y='40' width='20' height='20'/%3E  %3Crect x='178.78' y='60' width='20' height='20'/%3E  %3Crect x='198.78' y='80' width='20' height='20'/%3E  %3Crect x='218.78' y='100' width='20' height='20'/%3E  %3Crect x='138.78' y='280' width='20' height='20'/%3E  %3Crect x='158.78' y='260' width='20' height='20'/%3E  %3Crect x='178.78' y='240' width='20' height='20'/%3E  %3Crect x='198.78' y='220' width='20' height='20'/%3E  %3Crect x='218.78' y='200' width='20' height='20'/%3E  %3Crect x='238.78' y='120' width='20' height='20'/%3E  %3Crect x='258.78' y='140' width='20' height='20'/%3E  %3Crect x='258.78' y='160' width='20' height='20'/%3E  %3Crect x='58.78' y='260' width='20' height='20'/%3E  %3Crect x='58.78' y='280' width='20' height='20'/%3E  %3Crect x='58.78' y='20' width='20' height='20'/%3E  %3Crect x='58.78' y='40' width='20' height='20'/%3E  %3Crect x='238.78' y='180' width='20' height='20'/%3E  %3Crect x='78.78' y='60' width='20' height='20'/%3E  %3Crect x='98.78' y='80' width='20' height='20'/%3E  %3Crect x='118.78' y='100' width='20' height='20'/%3E  %3Crect x='78.78' y='240' width='20' height='20'/%3E  %3Crect x='98.78' y='220' width='20' height='20'/%3E  %3Crect x='118.78' y='200' width='20' height='20'/%3E  %3Crect x='138.78' y='120' width='20' height='20'/%3E  %3Crect x='158.78' y='140' width='20' height='20'/%3E  %3Crect x='158.78' y='160' width='20' height='20'/%3E  %3Crect x='138.78' y='180' width='20' height='20'/%3E%3C/svg%3E");
-    -webkit-mask-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='UTF-8'?%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320' width='320' height='320'%3E%3Cstyle%3Erect{fill:white}%3C/style%3E  %3Crect x='78.78' width='20' height='20'/%3E  %3Crect x='98.78' width='20' height='20'/%3E  %3Crect x='118.78' width='20' height='20'/%3E  %3Crect x='78.78' y='300' width='20' height='20'/%3E  %3Crect x='98.78' y='300' width='20' height='20'/%3E  %3Crect x='118.78' y='300' width='20' height='20'/%3E  %3Crect x='138.78' y='20' width='20' height='20'/%3E  %3Crect x='158.78' y='40' width='20' height='20'/%3E  %3Crect x='178.78' y='60' width='20' height='20'/%3E  %3Crect x='198.78' y='80' width='20' height='20'/%3E  %3Crect x='218.78' y='100' width='20' height='20'/%3E  %3Crect x='138.78' y='280' width='20' height='20'/%3E  %3Crect x='158.78' y='260' width='20' height='20'/%3E  %3Crect x='178.78' y='240' width='20' height='20'/%3E  %3Crect x='198.78' y='220' width='20' height='20'/%3E  %3Crect x='218.78' y='200' width='20' height='20'/%3E  %3Crect x='238.78' y='120' width='20' height='20'/%3E  %3Crect x='258.78' y='140' width='20' height='20'/%3E  %3Crect x='258.78' y='160' width='20' height='20'/%3E  %3Crect x='58.78' y='260' width='20' height='20'/%3E  %3Crect x='58.78' y='280' width='20' height='20'/%3E  %3Crect x='58.78' y='20' width='20' height='20'/%3E  %3Crect x='58.78' y='40' width='20' height='20'/%3E  %3Crect x='238.78' y='180' width='20' height='20'/%3E  %3Crect x='78.78' y='60' width='20' height='20'/%3E  %3Crect x='98.78' y='80' width='20' height='20'/%3E  %3Crect x='118.78' y='100' width='20' height='20'/%3E  %3Crect x='78.78' y='240' width='20' height='20'/%3E  %3Crect x='98.78' y='220' width='20' height='20'/%3E  %3Crect x='118.78' y='200' width='20' height='20'/%3E  %3Crect x='138.78' y='120' width='20' height='20'/%3E  %3Crect x='158.78' y='140' width='20' height='20'/%3E  %3Crect x='158.78' y='160' width='20' height='20'/%3E  %3Crect x='138.78' y='180' width='20' height='20'/%3E%3C/svg%3E");
-    mask-size: contain;
-    -webkit-mask-size: contain;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-position: center;
-}
-
-.nextpagebutton:hover .nextpageimage{
-    background-color: rgb(0,0,10);
-}
-
-@media (max-width: 1000px) {
-    .videotray {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: auto;
-        overflow: visible;
-        gap: 30px;
-        align-items: stretch;
-    }
-
-    /* make blocks full-width but keep side padding via margins */
-    .videoblock,
-    .bodyblock,
-    .bioblock {
-        width: calc(100% - 60px);
-        margin-left: 30px;
-        margin-right: 30px;
-        margin-top: 0;
-        position: relative;
-        bottom: auto;
-        opacity: 1;
-    }
-
-    /* ensure bio sits below bodyblock with 30px gap */
-    .bioblock {
-        /* bottom: 0px; */
-    }
-
-    /* collapse author columns to single stacked block */
-    .author-columns {
-        flex-direction: column;
-        gap: 15px;
-        width: calc(100% - 59px);
-    }
-
-    .author-columns .author-col {
-        width: 100%;
-    }
-
-    .headertray{
-        width: auto;
-        margin-left: 30px;
-        margin-right: 30px;
-    }
-
-    .container{
-        align-items: normal;
-    }
+.prevpagebutton:hover .prevpageimage {
+    background-color: rgb(0, 0, 0);
 }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ctOS 2.0 — Citizen Profile</title>
+    <link rel="stylesheet" href="ctos-styles.css" />
+  </head>
+  <body>
+
+    <div class="profile-block">
+      <div class="ctos-header">
+        <span class="ctos-title">ctOS 2.0 &nbsp;&mdash;&nbsp; Citizen Profile</span>
+        <span class="ctos-version">Blume Corporation / Sentinel Systems</span>
+      </div>
+      <hr class="ctos-divider" />
+
+      <!-- Scan animation (shown first) -->
+      <div class="scan-container" id="scan-container">
+        <p class="scan-label">&gt; Scanning citizen&hellip;</p>
+        <div class="scan-track">
+          <div class="scan-fill" id="scan-fill"></div>
+        </div>
+        <p class="scan-status" id="scan-status">ACQUIRING DATA</p>
+      </div>
+
+      <!-- Profile card (hidden until scan completes) -->
+      <div class="profile-data" id="profile-data">
+        <div class="profile-row">
+          <span class="row-label">Subject ID</span>
+          <span class="row-value" id="field-id"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Display</span>
+          <span class="row-value" id="field-display"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Locale</span>
+          <span class="row-value" id="field-locale"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Platform</span>
+          <span class="row-value" id="field-platform"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Timezone</span>
+          <span class="row-value" id="field-tz"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Last Seen</span>
+          <span class="row-value" id="field-time"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Device Sig.</span>
+          <span class="row-value" id="field-ua"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Risk Level</span>
+          <span class="row-value alert" id="field-risk"></span>
+        </div>
+        <div class="profile-row">
+          <span class="row-label">Status</span>
+          <span class="row-value alert" id="field-status">&gt; MONITORED <span class="blink-cursor"></span></span>
+        </div>
+      </div>
+
+      <p class="ctos-footer" id="ctos-footer" style="display:none;">
+        &gt; ctOS 2.0 — You are now less valuable than the data you produce.<br>
+        &gt; This profile is updated in real time. Compliance is not optional.
+      </p>
+    </div>
+
+    <div class="homecontainer">
+      <button class="homebutton" onclick="location.href='../index.html'">
+        <div class="homeimage"></div>
+      </button>
+    </div>
+
+    <div class="prevpage-container">
+      <button class="prevpagebutton" onclick="location.href='text5.html'">
+        <div class="prevpageimage"></div>
+      </button>
+    </div>
+
+    <script>
+      function randHex(len) {
+        return Array.from({ length: len }, () =>
+          Math.floor(Math.random() * 16).toString(16).toUpperCase()
+        ).join('');
+      }
+
+      const risks = ['LOW', 'MEDIUM', 'HIGH', 'ELEVATED'];
+      const risk  = risks[Math.floor(Math.random() * risks.length)];
+
+      function populateProfile() {
+        document.getElementById('field-id').textContent =
+          'CZ-' + randHex(4) + '-' + randHex(6);
+        document.getElementById('field-display').textContent =
+          screen.width + ' \u00d7 ' + screen.height +
+          ' (depth: ' + screen.colorDepth + 'bit)';
+        document.getElementById('field-locale').textContent =
+          navigator.language + ' / ' + (navigator.languages ? navigator.languages.join(', ') : 'N/A');
+        document.getElementById('field-platform').textContent =
+          navigator.platform || 'UNKNOWN';
+        document.getElementById('field-tz').textContent =
+          Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById('field-time').textContent =
+          new Date().toLocaleString();
+        document.getElementById('field-ua').textContent =
+          navigator.userAgent.substring(0, 72) + '\u2026';
+        document.getElementById('field-risk').textContent =
+          '> ' + risk;
+      }
+
+      // After 3.1s the scan "completes" and profile reveals
+      setTimeout(() => {
+        document.getElementById('scan-status').textContent = 'SCAN COMPLETE';
+        document.getElementById('scan-status').style.animation = 'none';
+
+        setTimeout(() => {
+          document.getElementById('scan-container').style.display = 'none';
+          populateProfile();
+          document.getElementById('profile-data').classList.add('visible');
+          document.getElementById('ctos-footer').style.display = 'block';
+        }, 400);
+      }, 3100);
+    </script>
+  </body>
+</html>

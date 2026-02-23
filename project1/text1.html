@@ -12,7 +12,7 @@
             <div class="centertray">
                 <p id="title">The Industrial Society and Its Future</p>
             
-                <p id = "author">Ted Kaczynski</p>
+                <p id="author">Ted Kaczynski</p>
             </div> 
 
             <div class="bottomtray">
@@ -330,8 +330,21 @@
                     <div class="nextpageimage"></div>
                 </button>
             </div>
+
+            <div class="mailcontainer" id="mailcontainer">
+                <button class="mailbutton" onclick="location.href='mail.html'">
+                    <div class="mailimage"></div>
+                    <span class="mail-badge" id="mail-badge"></span>
+                </button>
+            </div>
         </div>
     <script src="particles.js"></script>
+    <script>
+        setTimeout(function() {
+            var badge = document.getElementById('mail-badge');
+            badge.classList.add('badge-active');
+        }, 5000);
+    </script>
     </body>
 
     

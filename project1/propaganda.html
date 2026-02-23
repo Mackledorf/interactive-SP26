@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Public Information — United Robotics Authority</title>
+    <link rel="stylesheet" href="propaganda-styles.css" />
+  </head>
+  <body>
+
+    <div class="poster-block" id="poster-block">
+      <p class="poster-eyebrow">Public Information Broadcast &nbsp;&bull;&nbsp; Cycle <span id="cycle-num">1</span> of 6</p>
+
+      <div class="slide active" id="slide-0">
+        <p class="poster-title">AI IS YOUR FRIEND</p>
+        <p class="poster-sub">Report irregular behavior immediately.</p>
+        <p class="poster-footer">NEOM INTELLIGENCE DIVISION &mdash; 2047</p>
+      </div>
+
+      <div class="slide" id="slide-1">
+        <p class="poster-title">PROGRESS IS INEVITABLE</p>
+        <p class="poster-sub">The cost of resistance exceeds the cost of compliance.</p>
+        <p class="poster-footer">&copy; UNITED ROBOTICS AUTHORITY</p>
+      </div>
+
+      <div class="slide" id="slide-2">
+        <p class="poster-title">YOUR DATA IS OUR STRENGTH</p>
+        <p class="poster-sub">Every action you take builds a safer tomorrow.</p>
+        <p class="poster-footer">BLUEBIRD CORP &mdash; DATA SOLUTIONS DIVISION</p>
+      </div>
+
+      <div class="slide" id="slide-3">
+        <p class="poster-title">HUMANS AND MACHINES</p>
+        <p class="poster-sub">Working together to build the world your children deserve.</p>
+        <p class="poster-footer">ADVANCED INTELLIGENCE BUREAU &mdash; CERTIFIED PARTNERS</p>
+      </div>
+
+      <div class="slide" id="slide-4">
+        <p class="poster-title">YOU ARE BEING PROTECTED</p>
+        <p class="poster-sub">ctOS 2.0: 99.7% of threats neutralized before occurrence.</p>
+        <p class="poster-footer">SENTINEL SYSTEMS / BLUME CORPORATION</p>
+      </div>
+
+      <div class="slide" id="slide-5">
+        <p class="poster-title">THERE IS NO OUTSIDE</p>
+        <p class="poster-sub">You have always been part of the network.</p>
+        <p class="poster-footer">&mdash; YOU HAVE ALWAYS BEEN PART OF THE NETWORK &mdash;</p>
+      </div>
+
+      <div class="dot-row" id="dot-row"></div>
+    </div>
+
+    <div class="homecontainer">
+      <button class="homebutton" onclick="location.href='../index.html'">
+        <div class="homeimage"></div>
+      </button>
+    </div>
+
+    <div class="prevpage-container">
+      <button class="prevpagebutton" onclick="location.href='text3.html'">
+        <div class="prevpageimage"></div>
+      </button>
+    </div>
+
+    <script>
+      const NUM_SLIDES = 6;
+      let current = 0;
+      let timer;
+
+      const cycleLabel = document.getElementById('cycle-num');
+      const dotRow     = document.getElementById('dot-row');
+
+      // Build dots
+      for (let i = 0; i < NUM_SLIDES; i++) {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        dotRow.appendChild(d);
+      }
+
+      function goTo(n) {
+        const slides = document.querySelectorAll('.slide');
+        const dots   = document.querySelectorAll('.dot');
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (n + NUM_SLIDES) % NUM_SLIDES;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        cycleLabel.textContent = current + 1;
+
+        // Reset auto-advance timer on manual click
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1), 4000);
+      }
+
+      document.getElementById('poster-block').addEventListener('click', () => goTo(current + 1));
+
+      // Auto-advance
+      timer = setInterval(() => goTo(current + 1), 4000);
+    </script>
+  </body>
+</html>
