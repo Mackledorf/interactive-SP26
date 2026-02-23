@@ -2,22 +2,24 @@
     font-family: 'Courier New', monospace;
     margin: 0px;
     color: rgb(197,0,60);
+    box-sizing: border-box;
 }
 
 .container{
     display:flex;
     flex-direction: column;
     background-color: rgb(0,0,10);
+    height: auto;
     align-items: center;
 }
 
-.centertray{
+.headertray{
     display:flex;
     flex-direction: column;
     background-color: rgb(0,0,10);
     align-items: center;
     justify-content: center;
-    width:80vw;
+    width:80%;
     height:20vh;
     margin-top: 10vh;
     border-style: solid;
@@ -28,7 +30,7 @@
 .videotray{
     display: flex;
     flex-direction: row;
-    width: 85%;
+    width: 100%;
     height: auto;
     gap: 30px;
     margin-top: 30px;
@@ -41,10 +43,11 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    left: 9.7vw;
-    top
+    top: 0px;
+    left: 0px;
     width: auto;
-    height: 5vh;
+    height: 40px;
+    padding: 8px 12px;
     background-color: rgb(197,0,60);
     border-style: solid;
     border-top-left-radius: 16px;
@@ -56,9 +59,11 @@
     flex-direction: column;
     width: 50%;
     height: auto;
+    position: relative;
     border-radius: 20px;
     border-style: solid;
     margin-left: 30px;
+    justify-content: center;
 }
 
 .videoblock iframe,
@@ -76,12 +81,11 @@
 
 .bottomtray{
     display: flex;
-    flex-direction: row;
-    width: 85%;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
     gap: 30px;
     margin-bottom: 30px;
-    align-items: flex-start;
-    justify-content: center;
 }
 
 .bodyblock{
@@ -101,12 +105,13 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(197,0,60);
-    width: 40%;
+    width: auto;
     height: auto;
     border-radius: 20px;
     border-style: solid;
-    border-color: rgb(197,0,60);
-    margin-right:30px;
+    border-color: rgb(243,230,0);
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 #title{
@@ -133,14 +138,21 @@
     color: rgb(85,234,212);
 }
 
+#credit{
+    font-size: 16px;
+    font-family:'Courier New', monospace;
+    hyphens: auto;
+    color: black;
+}
+
 #bio{
     font-size: 16px;
     font-family:'Courier New', monospace;
     margin-left: 30px;
     margin-right: 30px;
-    margin-top: 20px;
     hyphens: auto;
     color: black;
+    margin-top: 10px;
 }
 
 .bioimage{
@@ -151,16 +163,36 @@
     border-color: black;
     background-repeat: no-repeat;
     border-radius: 15px;
-    height: 400px;
-    width: auto;
-    margin-top: 30px;
     margin-left: 30px;
     margin-right: 30px;
+    margin-top: 30px;
 }
 
-#ted-kaczynski{
+/* two-column author bio */
+.author-columns{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 20px; 
+    margin-left: 32px;
+    margin-right: 28px;
+    margin-bottom: 20px;
+}
+
+.author-columns .author-col{
+    flex: 1 1 0;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    color: black;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+#image{
     border-radius: 11.5px;
-    height: 400px;
+    height: auto;
     width: auto;
 }
 
@@ -170,6 +202,8 @@
     margin-left: 31px;
     margin-right: 30px;
     margin-top: 20px;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
     hyphens: auto;
 }
 
@@ -202,7 +236,6 @@
     border-style: solid;
     border-color: rgb(243,230,0);
     border-radius: 25px;
-    border-width: 2.5px;
     align-items: center;
     justify-content: center;
 }
@@ -252,7 +285,6 @@
     border-style: solid;
     border-color: rgb(243,230,0);
     border-radius: 25px;
-    border-width: 2.5px;
     align-items: center;
     justify-content: center;
     background-color: rgb(0,0,10);
@@ -286,7 +318,6 @@
     border-style: solid;
     border-color: rgb(243,230,0);
     border-radius: 25px;
-    border-width: 2.5px;
     align-items: center;
     justify-content: center;
     background-color: rgb(0,0,10);
@@ -332,4 +363,55 @@
 
 .nextpagebutton:hover .nextpageimage{
     background-image: url(nextpage-button.png);
+}
+
+@media (max-width: 1000px) {
+    .videotray {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        gap: 30px;
+        align-items: stretch;
+    }
+
+    /* make blocks full-width but keep side padding via margins */
+    .videoblock,
+    .bodyblock,
+    .bioblock {
+        width: calc(100% - 60px);
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 0;
+        position: relative;
+        bottom: auto;
+        opacity: 1;
+    }
+
+    /* ensure bio sits below bodyblock with 30px gap */
+    .bioblock {
+        /* bottom: 0px; */
+    }
+
+    /* collapse author columns to single stacked block */
+    .author-columns {
+        flex-direction: column;
+        gap: 15px;
+        width: calc(100% - 59px);
+    }
+
+    .author-columns .author-col {
+        width: 100%;
+    }
+
+    .headertray{
+        width: auto;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .container{
+        align-items: normal;
+    }
 }

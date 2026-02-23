@@ -1,76 +1,105 @@
-*{
-    font-family: 'Courier New', monospace;
-    margin: 0px;
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+* {
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#header{
-    font-size: 100px;
-    font-family:'Courier New', monospace;
-    font-weight: bold;
-    letter-spacing: 60px;
-    color: white;
-    justify-content: center;
-    align-items: center;
+/* ── Base ────────────────────────────────────────────────────────────────── */
+body {
+  background-color: rgb(27, 27, 27);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* ── Particle canvas — fixed full-screen background ─────────────────────── */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* let mouse events pass through to the page */
+}
+
+/* ── Content layer ───────────────────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 10px;
+  padding: 10px;
+}
+
+/* ── Clock ───────────────────────────────────────────────────────────────── */
 .clock-container {
-    font-size: 32px;
-    text-align: center;
-    font-family: 'Courier New';
-    color:white;
+  font-size: 32px;
+  text-align: center;
+  font-family: 'Courier New';
+  color: white;
 }
 
-#footer{
-    display:flex;
-    justify-content: center;
-    font-size: 12px;
-    font-family: 'Courier New';
-    font-weight: bold;
+/* ── Header ──────────────────────────────────────────────────────────────── */
+#header {
+  font-size: clamp(40px, 8vw, 100px);
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: clamp(10px, 4vw, 60px);
+  color: white;
+  text-align: center;
 }
 
-.container{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    width:100vw;
-    height:100vh;
+/* ── Nav buttons ─────────────────────────────────────────────────────────── */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.top{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding:10px;
-    height:100vh;
-    width:100vw;
+.page-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  height: 50px;
+  width: 150px;
+  border-radius: 5px;
+  transition: background 0.2s, transform 0.15s;
 }
 
-.top-item{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background:rgb(27, 27, 27);
-    height:100vh;
-    width:100vw;
-    gap:10px;
-    padding: 10px;
+.page-button:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-2px);
 }
 
-.page-button{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background:white;
-    height:50px;
-    width:150px;
-    border-radius: 5px;
+#button-text {
+  font-family: 'Courier New', Courier, monospace;
+  color: rgb(27, 27, 27);
+  text-decoration: none;
 }
 
-#button-text{
-    font-family: 'Courier New', Courier, monospace;
-    color:rgb(27, 27, 27);
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+footer {
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+  z-index: 1;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  font-family: 'Courier New';
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.5);
 }

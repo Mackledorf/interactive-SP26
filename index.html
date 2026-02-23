@@ -1,58 +1,176 @@
 <!DOCTYPE html>
-<html> 
-    <head>
-      <link rel="stylesheet" href="styles.css">
-      <script src="https://code.jquery.com/jquery-4.0.0.js"   
-      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
-      crossorigin="anonymous"></script>
-      <title>&gt;MadeByDiego</title>
-      <link rel="icon" type="image/png" href="assets/images/favicon.jpeg">
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&gt;MadeByDiego — test</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.jpeg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-    <div class="container">
-        <div class="top">
-            <div class="top-item">
-              <div id="clock" class="clock-container"></div>
+  <body>
+    
+    <canvas id="particle-canvas"></canvas>
 
-              <script type="text/javascript">
-                  function updateTime() {
-                      var now = new Date();
-                      var formattedTime = now.toLocaleTimeString(); 
-                      $('#clock').text(formattedTime);
-                  }
-          
-                  $(document).ready(function() {
-                      updateTime();
-                      setInterval(updateTime, 1000);
-                  });
-              </script>
+    
+    <div class="content">
+      <div id="clock" class="clock-container"></div>
+      <p id="header">&gt;WELCOME</p>
 
-              <p id="header">&gt;WELCOME</p><br><br>
-
-              <div class="page-button">
-                  <a id="button-text" href="project1/text1.html">&gt;text1</a>
-              </div>
-
-              <div class="page-button">
-                  <a id="button-text" href="project1/text2.html">&gt;text2</a>
-              </div>
-
-              <div class="page-button">
-                  <a id="button-text" href="project1/text3.html">&gt;text3</a>
-              </div>
-
-              <div class="page-button">
-                  <a id="button-text" href="project1/text4.html">&gt;text4</a>
-              </div>
-
-              <div class="page-button">
-                  <a id="button-text" href="project1/text5.html">&gt;text5</a>
-              </div>
-            </div>
-        </div>
+      <div class="button-group">
+        <div class="page-button"><a id="button-text" href="project1/text1.html">&gt;text1</a></div>
+        <div class="page-button"><a id="button-text" href="project1/text2.html">&gt;text2</a></div>
+        <div class="page-button"><a id="button-text" href="project1/text3.html">&gt;text3</a></div>
+        <div class="page-button"><a id="button-text" href="project1/text4.html">&gt;text4</a></div>
+        <div class="page-button"><a id="button-text" href="project1/text5.html">&gt;text5</a></div>
+      </div>
     </div>
 
     <footer>
-        <p id="footer">Updated Feb 3 7:17pm</p>
+      <p id="footer">Updated Feb 22 2026</p>
     </footer>
+
+    <script>
+      // ── Clock ─────────────────────────────────────────────────────────────
+      function updateTime() {
+        document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+
+      // ── Particle Network ──────────────────────────────────────────────────
+      const canvas  = document.getElementById('particle-canvas');
+      const ctx     = canvas.getContext('2d');
+
+      // Config — tweak these to taste
+      const CFG = {
+        particleCount : 180,
+        particleColor : 'rgba(255,255,255,',   // alpha appended per particle
+        lineColor     : 'rgba(255,255,255,',
+        maxSize       : 3,
+        speed         : 1.2,
+        linkDistance  : 130,   // max distance to draw a line between particles
+        mouseDistance : 150,   // mouse "grab" radius
+        lineWidth     : 0.8,
+      };
+
+      let W, H, dpr;
+      let mouse = { x: null, y: null };
+
+      // ── Resize handling (retina-aware) ─────────────────────────────────────
+      function resize() {
+        dpr    = window.devicePixelRatio || 1;
+        W      = window.innerWidth;
+        H      = window.innerHeight;
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
+      }
+      resize();
+      window.addEventListener('resize', () => { resize(); initParticles(); });
+
+      // ── Mouse tracking ────────────────────────────────────────────────────
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+      window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      // ── Particle class ────────────────────────────────────────────────────
+      class Particle {
+        constructor() { this.reset(true); }
+
+        reset(initial) {
+          this.x  = Math.random() * W;
+          this.y  = initial ? Math.random() * H : (Math.random() < 0.5 ? 0 : H);
+          this.vx = (Math.random() - 0.5) * CFG.speed;
+          this.vy = (Math.random() - 0.5) * CFG.speed;
+          this.r  = Math.random() * CFG.maxSize + 0.8;
+          this.opacity = Math.random() * 0.5 + 0.4;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          // Wrap around edges
+          if (this.x < -10) this.x = W + 10;
+          if (this.x > W + 10) this.x = -10;
+          if (this.y < -10) this.y = H + 10;
+          if (this.y > H + 10) this.y = -10;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fillStyle = CFG.particleColor + this.opacity + ')';
+          ctx.fill();
+        }
+      }
+
+      // ── Particle pool ─────────────────────────────────────────────────────
+      let particles = [];
+      function initParticles() {
+        particles = Array.from({ length: CFG.particleCount }, () => new Particle());
+      }
+      initParticles();
+
+      // ── Distance helper ───────────────────────────────────────────────────
+      function dist(ax, ay, bx, by) {
+        const dx = ax - bx, dy = ay - by;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+
+      // ── Draw a line between two points with fading opacity ─────────────────
+      function drawLine(x1, y1, x2, y2, d, maxD, extraOpacity) {
+        const alpha = (1 - d / maxD) * (extraOpacity ?? 0.6);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = CFG.lineColor + alpha + ')';
+        ctx.lineWidth   = CFG.lineWidth;
+        ctx.stroke();
+      }
+
+      // ── Main animation loop ───────────────────────────────────────────────
+      function animate() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Update & draw particles
+        for (const p of particles) {
+          p.update();
+          p.draw();
+        }
+
+        // Draw particle ↔ particle links
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const d = dist(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+            if (d < CFG.linkDistance) {
+              drawLine(particles[i].x, particles[i].y,
+                       particles[j].x, particles[j].y,
+                       d, CFG.linkDistance);
+            }
+          }
+        }
+
+        // Draw mouse ↔ particle links (grab mode)
+        if (mouse.x !== null) {
+          for (const p of particles) {
+            const d = dist(mouse.x, mouse.y, p.x, p.y);
+            if (d < CFG.mouseDistance) {
+              drawLine(mouse.x, mouse.y, p.x, p.y, d, CFG.mouseDistance, 0.9);
+            }
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
 </html>
